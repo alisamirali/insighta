@@ -1,6 +1,15 @@
+"use client";
+
 import { InsightaLogo } from "@/components/insighta-logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignUpButton,
+  UserButton,
+} from "@insforge/nextjs";
 import Link from "next/link";
 
 export function Header() {
@@ -36,10 +45,23 @@ export function Header() {
 
         <div className="flex items-center gap-4">
           <ThemeToggle />
-          <Button variant="secondary" size="lg">
-            Login
-          </Button>
-          <Button size="lg">Get started</Button>
+          <div className="flex items-center gap-4">
+            <SignedOut>
+              <SignInButton>
+                <Button variant="secondary">Login</Button>
+              </SignInButton>
+              <SignUpButton>
+                <Button variant="default">Sign Up</Button>
+              </SignUpButton>
+            </SignedOut>
+
+            <SignedIn>
+              <UserButton />
+              <Button variant="outline" asChild>
+                <Link href="/dashboard">Dashboard</Link>
+              </Button>
+            </SignedIn>
+          </div>
         </div>
       </div>
     </div>
