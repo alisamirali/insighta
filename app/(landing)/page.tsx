@@ -1,11 +1,14 @@
+import { AppCard } from "./_common/app-card";
+import { Header } from "./_common/header";
+import { Hero } from "./_common/hero";
+
 export default function Home() {
   return (
     <div className="relative min-h-screen flex flex-col">
-      header
+      <Header />
       <div className="flex-1">
-        hero section
-        <br />
-        app card
+        <Hero />
+        <AppCard />
       </div>
     </div>
   );
