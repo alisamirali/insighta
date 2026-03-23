@@ -19,7 +19,10 @@ export function InsightaLogo({
 
       {showText && (
         <span
-          className={cn("text-xl font-bold text-foreground", textClassName)}
+          className={cn(
+            "text-xl font-bold text-black in-[.dark]:text-white",
+            textClassName,
+          )}
         >
           Insighta
         </span>
