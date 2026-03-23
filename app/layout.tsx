@@ -1,6 +1,8 @@
+import { Footer } from "@/components/footer";
 import { InsforgeProvider } from "@/components/insforge-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { getAuthFromCookies } from "@insforge/nextjs";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -33,6 +35,7 @@ export default async function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
         <InsforgeProvider initialState={initialState}>
@@ -42,8 +45,11 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            {children}
-            <Toaster />
+            <TooltipProvider>
+              {children}
+              <Footer />
+              <Toaster />
+            </TooltipProvider>
           </ThemeProvider>
         </InsforgeProvider>
       </body>
