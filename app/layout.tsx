@@ -1,5 +1,6 @@
 import { Footer } from "@/components/footer";
 import { InsforgeProvider } from "@/components/insforge-provider";
+import { QueryProvider } from "@/components/query-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -38,20 +39,22 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
-        <InsforgeProvider initialState={initialState}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <TooltipProvider>
-              {children}
-              <Footer />
-              <Toaster />
-            </TooltipProvider>
-          </ThemeProvider>
-        </InsforgeProvider>
+        <QueryProvider>
+          <InsforgeProvider initialState={initialState}>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <TooltipProvider>
+                {children}
+                <Footer />
+                <Toaster />
+              </TooltipProvider>
+            </ThemeProvider>
+          </InsforgeProvider>
+        </QueryProvider>
       </body>
     </html>
   );
