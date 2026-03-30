@@ -10,7 +10,15 @@
         "--api_base_url",
         "https://yjtyurh8.us-east.insforge.app"
       ],
-      "autoApprove": ["fetch-docs"],
+      "autoApprove": [
+        "fetch-docs",
+        "get-backend-metadata",
+        "run-raw-sql",
+        "get-table-schema",
+        "get-container-logs",
+        "fetch-sdk-docs",
+        "get-anon-key"
+      ],
       "env": {}
     }
   }

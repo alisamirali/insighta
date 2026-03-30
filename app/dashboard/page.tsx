@@ -2,8 +2,12 @@
 
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
+import { useState } from "react";
+import { AddWebsiteDialog } from "./_common/add-website-dialog";
 
 export default function DashboardPage() {
+  const [open, setOpen] = useState(false);
+
   return (
     <>
       <div className="space-y-8 w-full min-h-screen">
@@ -16,12 +20,14 @@ export default function DashboardPage() {
               domains.
             </p>
           </div>
-          <Button onClick={() => {}}>
+          <Button onClick={() => setOpen(true)}>
             <Plus className="size-4" />
             Add Website
           </Button>
         </div>
       </div>
+
+      <AddWebsiteDialog open={open} onOpenChange={setOpen} />
     </>
   );
 }
