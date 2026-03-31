@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { getAuthFromCookies } from "@insforge/nextjs";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -38,6 +39,14 @@ export default async function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        <Script
+          data-domain="localhost:3000"
+          data-site-id="P-25-G-NZBDNOIHINODW3XO"
+          src="http://localhost:3000/js/insighta.js"
+          strategy="afterInteractive"
+        />
+      </head>
       <body className="min-h-full flex flex-col">
         <QueryProvider>
           <InsforgeProvider initialState={initialState}>
