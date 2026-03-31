@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
+import { getLiveVisitors } from "@/app/action/analytics";
 import { getWebsites } from "@/app/action/website";
 import { AddWebsiteDialog } from "@/app/dashboard/_common/add-website-dialog";
 import { Button } from "@/components/ui/button";
@@ -67,6 +68,16 @@ export function MainTopBar({ activePreset, onPresetSelect }: MainTopBarProps) {
     },
   });
 
+  const { data: liveVisitors, isPending } = useQuery({
+    queryKey: ["live-visitors", websiteId],
+    queryFn: async () => {
+      const res = await getLiveVisitors(websiteId as string);
+      return res.liveVisitors || 0;
+    },
+    refetchInterval: 30000,
+    enabled: !!websiteId,
+  });
+
   const currentWebsite =
     data?.find((w: any) => w.id === websiteId) || data?.[0];
 
@@ -126,7 +137,11 @@ export function MainTopBar({ activePreset, onPresetSelect }: MainTopBarProps) {
                 ))
               )}
 
-              {data?.length === 0 && <div>No Websites found</div>}
+              {data?.length === 0 && (
+                <p className="py-2 text-xs w-full text-center">
+                  No Websites found
+                </p>
+              )}
 
               <DropdownMenuSeparator />
 
@@ -142,8 +157,18 @@ export function MainTopBar({ activePreset, onPresetSelect }: MainTopBarProps) {
 
           {/* Current Visitors */}
           <div className="flex items-center gap-2 text-sm">
-            <div className="size-2 rounded-full bg-green-500 animate-pulse" />
-            Current Visitors
+            <div
+              className="size-2 rounded-full
+           bg-green-500 animate-pulse"
+            />
+
+            {isPending ? (
+              <Skeleton className="h-4 w-12" />
+            ) : (
+              <span className="text-foreground">
+                {liveVisitors || 0} current Visitors
+              </span>
+            )}
           </div>
         </div>
 

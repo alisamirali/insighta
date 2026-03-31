@@ -43,7 +43,7 @@ export default async function RootLayout({
         <Script
           data-domain="localhost:3000"
           data-site-id="P-25-G-NZBDNOIHINODW3XO"
-          src="http://localhost:3000/js/insighta.js"
+          src="http://localhost:3000/js/insighta.min.js"
           strategy="afterInteractive"
         />
       </head>
