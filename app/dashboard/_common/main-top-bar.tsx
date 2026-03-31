@@ -62,7 +62,6 @@ export function MainTopBar({ activePreset, onPresetSelect }: MainTopBarProps) {
     queryKey: ["websites"],
     queryFn: async () => {
       const res = await getWebsites();
-      console.log(res, "res");
       if (res?.error) throw new Error(res.error);
       return res.websites || [];
     },
@@ -99,6 +98,7 @@ export function MainTopBar({ activePreset, onPresetSelect }: MainTopBarProps) {
                 </Button>
               )}
             </DropdownMenuTrigger>
+
             <DropdownMenuContent align="start" className="w-56">
               <DropdownMenuLabel className="text-muted-foreground text-xs uppercase">
                 Websites
@@ -125,8 +125,11 @@ export function MainTopBar({ activePreset, onPresetSelect }: MainTopBarProps) {
                   </DropdownMenuItem>
                 ))
               )}
+
               {data?.length === 0 && <div>No Websites found</div>}
+
               <DropdownMenuSeparator />
+
               <DropdownMenuItem
                 onSelect={() => setOpenWebsite(true)}
                 className="cursor-pointer gap-2 text-primary focus:text-primary focus:bg-primary/5 font-medium"

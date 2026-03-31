@@ -43,15 +43,12 @@ export async function addWebsite(domain: string) {
 export async function getWebsites() {
   const { insforge, user } = await getAuthenticatedClient();
   if (!user) return { error: "Unauthorized" };
-  console.log(user, "user");
 
   const { data: websites, error } = await insforge.database
     .from("websites")
     .select("*")
     .eq("user_id", user.id)
     .order("created_at", { ascending: false });
-
-  console.log(websites, error, "error");
 
   if (error) return { error: "Failed to fetch websites" };
 
